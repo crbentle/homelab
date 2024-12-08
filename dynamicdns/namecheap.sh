@@ -1,0 +1,1 @@
+curl "https://dynamicdns.park-your-domain.com/update?host={@,www,photos,request}&domain=${DOMAIN}&password=${PASSWORD}" -k &> ~/dynamicdns/namecheap.log

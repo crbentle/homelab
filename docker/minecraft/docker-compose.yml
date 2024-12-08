@@ -1,0 +1,36 @@
+services:
+  bds:
+    image: itzg/minecraft-bedrock-server
+    container_name: minecraft
+    environment:
+      TZ: "America/New_York"
+      EULA: "TRUE" 
+      LEVEL_SEED: "-3236558351030609287"
+      ENABLE_SSH: "TRUE"
+      DUMP_SERVER_PROPERTIES: "TRUE"
+      PVP: "FALSE"
+      SHOW_COORDINATES: "TRUE"
+    ports:
+      - "19132:19132/udp"
+    expose:
+      - 2222
+    volumes:
+      - ./data:/data
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+
+  backup:
+    image: kaiede/minecraft-bedrock-backup
+    restart: always
+    depends_on:
+      # Make sure the minecraft service starts before the backup
+      - "bds"
+    environment:
+        # Without this, your log timestamps will be in the GMT timezone.
+        TZ: "America/New_York"
+    volumes:
+      # Map your backups folder into /data
+      - ./backups:/data
+      # Map your server's data folder wherever you like
+      - ./data:/bds
