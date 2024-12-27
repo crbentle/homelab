@@ -25,7 +25,8 @@ services:
     restart: always
     depends_on:
       # Make sure the minecraft service starts before the backup
-      - "bds"
+      bds:
+        condition: service_healthy
     environment:
         # Without this, your log timestamps will be in the GMT timezone.
         TZ: "America/New_York"
@@ -34,3 +35,5 @@ services:
       - ./backups:/data
       # Map your server's data folder wherever you like
       - ./data:/bds
+      # Map the /config folder to fix issue with healthcheck
+      - ./backups:/config
