@@ -1,0 +1,13 @@
+services:
+  samba:
+    image: ghcr.io/servercontainers/samba:latest
+    container_name: samba
+    restart: unless-stopped
+    environment:
+      ACCOUNT_{username}: {password}
+      UID_{username}: 1000
+      SAMBA_VOLUME_CONFIG_sharename: "[media]; path=/shares/media; available = yes; browsable = yes; writable = yes; read only = no; force user = {username}; public = yes; guest ok = yes"
+    volumes:
+      - /media/storage/plexMedia:/shares/media
+    ports:
+      - 445:445
