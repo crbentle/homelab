@@ -37,7 +37,7 @@ services:
       - TORRENTING_PORT=6881
     volumes:
       - ${DOCKER_DATA_PATH}/plex/qbittorrent/appdata:/config
-      - /mnt/plexMedia/Media:/downloads
+      - /media/storage/plexMedia/Media:/downloads
     restart: unless-stopped
 
   prowlarr:
@@ -65,8 +65,8 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ${DOCKER_DATA_PATH}/plex/data/sonarr:/config
-      - "/mnt/plexMedia/Media/TV Shows:/tv"
-      - /mnt/plexMedia/Media:/downloads
+      - "/media/storage/plexMedia/Media/TV Shows:/tv"
+      - /media/storage/plexMedia/Media:/downloads
     restart: unless-stopped
     network_mode: service:gluetun
     depends_on:
@@ -83,8 +83,8 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ${DOCKER_DATA_PATH}/plex/data/radarr:/config
-      - /mnt/plexMedia/Media/Movies:/movies
-      - /mnt/plexMedia/Media:/downloads
+      - /media/storage/plexMedia/Media/Movies:/movies
+      - /media/storage/plexMedia/Media:/downloads
     restart: unless-stopped
     network_mode: service:gluetun
     depends_on:
@@ -131,7 +131,7 @@ services:
     volumes:
       - ${DOCKER_DATA_PATH}/plex/data/plex:/config
       - ${DOCKER_DATA_PATH}/plex/data/plex/transcode:/transcode
-      - "/mnt/plexMedia/Media/TV Shows:/tv"
-      - /mnt/plexMedia/Media/Movies:/movies
-      - "/mnt/plexMedia/Media/Home Videos:/home_videos"
+      - "/media/storage/plexMedia/Media/TV Shows:/tv"
+      - /media/storage/plexMedia/Media/Movies:/movies
+      - "/media/storage/plexMedia/Media/Home Videos:/home_videos"
     restart: unless-stopped
