@@ -11,7 +11,7 @@ services:
       # Required:
       # Change this to your host's public address
       - WG_HOST=${HOST_URL}
-      - PASSWORD=${UI_PASSWORD}
+      - PASSWORD_HASH=${UI_PASSWORD_HASH}
 
       # Optional:
       # - PASSWORD=foobar123
