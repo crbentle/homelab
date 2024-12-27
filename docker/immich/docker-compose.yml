@@ -17,8 +17,7 @@ services:
     volumes:
       - ${UPLOAD_LOCATION}:/usr/src/app/upload
       - /etc/localtime:/etc/localtime:ro
-      - /mnt/plexMedia/Media/Photos:/mnt/media/plexPhotos:ro
-      - /mnt/plexMedia/Media/immich_bkp/admin:/mnt/plexMedia/Media/immich_bkp/admin:ro
+      - /media/storage/plexMedia/Media/Photos:/mnt/media/plexPhotos:ro
     env_file:
       - .env
     ports:
