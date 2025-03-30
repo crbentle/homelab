@@ -1,0 +1,15 @@
+services:
+  cloudflare-ddns:
+    image: favonia/cloudflare-ddns:latest
+    restart: always
+    user: "1000:1000"
+    read_only: true
+    # Drop all Linux capabilities (optional but recommended)
+    cap_drop: [all]
+    # Another protection to restrict superuser privileges (optional but recommended)
+    security_opt: [no-new-privileges:true]
+    environment:
+      - CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN}
+      - DOMAINS=${DOMAINS}
+      - PROXIED=false
+      - IP6_PROVIDER=none

@@ -4,12 +4,12 @@ services:
     container_name: samba
     restart: unless-stopped
     environment:
-      ACCOUNT_{username}: {password}
-      UID_{username}: 1000
-      GROUP_mount: 2000
-      GROUPS_{username}: mount
-      SAMBA_VOLUME_CONFIG_sharename: "[media]; path=/shares/media; available = yes; browsable = yes; writable = yes; read only = no; force user = {username}; public = yes; guest ok = yes"
+      SAMBA_VOLUME_CONFIG_sharename: "[media]; path=/shares/media; available = yes;
+        browsable = yes; writable = yes; read only = no; force user = ${MEDIA_USER};
+        public = yes; guest ok = yes"
     volumes:
       - /media/storage/plexMedia:/shares/media
     ports:
       - 445:445
+    env_file: .env
+networks: {}

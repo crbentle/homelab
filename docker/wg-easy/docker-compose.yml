@@ -1,6 +1,3 @@
-version: "3.8"
-volumes:
-  etc_wireguard:
 
 services:
   wg-easy:
@@ -10,8 +7,9 @@ services:
       - LANG=en
       # Required:
       # Change this to your host's public address
-      - WG_HOST=${HOST_URL}
-      - PASSWORD_HASH=${UI_PASSWORD_HASH}
+      - WG_HOST=${WG_HOST}
+      #- PASSWORD=rRzAo37mY#V^
+      - PASSWORD_HASH=${PASSWORD_HASH}
 
       # Optional:
       # - PASSWORD=foobar123
@@ -32,7 +30,7 @@ services:
     image: ghcr.io/wg-easy/wg-easy
     container_name: wg-easy
     volumes:
-      - etc_wireguard:/etc/wireguard
+      - ./data:/etc/wireguard
     ports:
       - "51820:51820/udp"
       - "51821:51821/tcp"
@@ -43,3 +41,7 @@ services:
     sysctls:
       - net.ipv4.ip_forward=1
       - net.ipv4.conf.all.src_valid_mark=1
+networks:
+  default:
+    external: true
+    name: npm_network
